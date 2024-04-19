@@ -1,0 +1,71 @@
+---
+title: <span style="color:#034a94"> **Supuestos del modelo**</span>
+author: "Métodos y Simulación Estadística"
+output:
+  html_document:
+    code_folding: hide
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+library(ggplot2)
+library(paqueteMETODOS)
+data(biomasa)
+modelo=lm(log(bio_total) ~ diametro, data=biomasa)
+```
+
+</br></br>
+
+El método **MCO**, es un método matemático que tiene solución única, sin embargo, si se desea realizar **inferencia estadística** como intervalos de confianza y pruebas de hipótesis sobre las estimaciones, es necesario validar los siguientes supuestos:
+
+</br>
+
+### <span style="color:#034A94">**Normalidad**</span> 
+
+Los errores   siguen una distribución normal $(\varepsilon_{i} \sim N(0, \sigma^2))$
+
+</br>
+
+### <span style="color:#034A94">**Homoscedasticidad**</span>
+
+La varianza al rededor de la linea de regresión, para cualquier valor constante ($V[\varepsilon] = \sigma^2$)
+
+</br>
+
+###  <span style="color:#034A94">**Linealidad**</span>
+
+La relación entre la variable dependiente y las variables independientes y el error es lineal. Es decir que las variables pueden tener cualquier forma pero los parametros deben garantizar una relacion lineal ($y_{i}= \beta_{0}+ \beta_{1} x_{i} + \varepsilon_{i}$)
+
+</br>
+
+###  <span style="color:#034A94">**No autocorrelación**</span>
+
+Los errores que corresponden a diferentes individuos o diferentes tiempo deben ser independintes unos de otros ($Cov[\varepsilon_{i},  \varepsilon_{j}] = 0$)
+
+</br>
+
+### <span style="color:#034A94">**Outliers**</span>  
+
+Aunque no es un supuesto formal, se espera que la data no contenga datos atípicos que generen sesgos en los estimadores de los coeficientes
+
+
+</br></br>
+
+Para estas verificaciones se emplean pruebas de hipótesis :
+
+</br>
+
+* Normalidad : `shapiro.test()`
+* Homoscedasticidad : `lmtest::bptest()`
+* No autocorrelación : `lmtest::dwtest()` 
+* outliers : visualización gráfica - `boxplot()`, `plot()` 
+
+
+

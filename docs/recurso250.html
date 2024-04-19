@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Métodos y Simulación Estadística" />
+
+
+<title> Código R - Modelo</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"> </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso100.html">Análisis de Correlación</a>
+    </li>
+    <li>
+      <a href="recurso110.html">Coeficiente de Pearson</a>
+    </li>
+    <li>
+      <a href="recurso120.html">Otros coeficientes</a>
+    </li>
+    <li>
+      <a href="recurso130.html">Código R - correlación</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso200.html">Modelo de Regresión Lineal Simple</a>
+    </li>
+    <li>
+      <a href="recurso210.html">Estimación Mínimos Cuadrados Ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso220.html">Estimación de Máxima Verosimilitud</a>
+    </li>
+    <li>
+      <a href="recurso230.html">Supuestos del modelo</a>
+    </li>
+    <li>
+      <a href="recurso240.html">Transformaciones</a>
+    </li>
+    <li>
+      <a href="recurso250.html">Código R - estimación</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Predicción
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso300.html">Inferencia sobre el modelo</a>
+    </li>
+    <li>
+      <a href="recurso310.html">Inferencia sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso320.html">Inferencia sobre la variable respuesta</a>
+    </li>
+    <li>
+      <a href="recurso330.html">Código R - inferencia</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94"> <strong>Código
+R - Modelo</strong></span></h1>
+<h4 class="author">Métodos y Simulación Estadística</h4>
+
+</div>
+
+
+<p></br></br></p>
+<p>A continuación se presenta el código en R para estimar el modelo y
+validar los supuestos más importantes</p>
+<p></br></p>
+<div id="estimación-mco" class="section level3">
+<h3><span style="color:#034a94"><strong>Estimación
+MCO</strong></span></h3>
+<pre class="r"><code>library(paqueteMETODOS)
+data(biomasa)
+modelo=lm(bio_total ~ diametro, data=biomasa)
+summary(modelo)</code></pre>
+<p>Los resultados se presentan en cuatro partes :</p>
+<p></br></br></p>
+</div>
+<div id="formula-del-modelo" class="section level3">
+<h3><span style="color:#034A94"><strong>Formula del
+modelo</strong></span></h3>
+<p><span class="math display">\[\widehat{\text{bio_total}_{i}} =
+\widehat{\beta}_{0} + \widehat{\beta}_{1}
+\hspace{.2cm}\text{diametro}_{i}\]</span></p>
+<pre>
+Call:
+lm(formula = log(bio_total) ~ diametro, data = biomasa)
+</pre>
+<p></br></br></p>
+</div>
+<div id="estadística-de-los-residuales" class="section level3">
+<h3><span style="color:#034A94"><strong>Estadística de los
+residuales</strong></span></h3>
+<pre>
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6.3775 -2.6594  0.0237  1.8758 11.9876 
+</pre>
+<p></br></br></p>
+</div>
+<div id="coeficientes-estimados" class="section level3">
+<h3><span style="color:#034A94"><strong>Coeficientes
+estimados</strong></span></h3>
+<pre>
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  -9.0203     1.4129  -6.384 7.86e-09 ***
+diametro      5.1026     0.2508  20.346  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+</pre>
+<p></br></p>
+<p><span class="math display">\[\widehat{\text{bio_total}_{i}} = -9.0203
++ 5.1026 \hspace{.2cm} \text{diametro}_{i}\]</span> Además se presentan
+los resultados de las pruebas de hipótesis individuales sobre los
+coeficientes:</p>
+<!-- | Hipótesis             |  Estadístico de prueba        |   valor p            | -->
+<!-- |:----------------------|:------------------------------|:---------------------| -->
+<!-- $Ho: \beta_{0} = 0$     |   -6.384                      |  0.0000              | -->
+<!-- $Ha: \beta_{0} \neq 0$  |                               |                      | -->
+<!-- |                       |                               |                      | -->
+<!-- |$Ho: \beta_{1} = 0$    |   20.346                      |  0.0000              | -->
+<!-- |$Ha: \beta_{1} \neq 0$ |                               |                      | -->
+<p><img src="img/pruebas1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p></br></br></p>
+</div>
+<div id="indicadores-de-ajuste" class="section level3">
+<h3><span style="color:#034A94"><strong>Indicadores de
+ajuste</strong></span></h3>
+<pre>
+Residual standard error: 3.435 on 88 degrees of freedom
+Multiple R-squared:  0.8247,    Adjusted R-squared:  0.8227 
+F-statistic:   414 on 1 and 88 DF,  p-value: < 2.2e-16
+</pre>
+<p>Este resultado muestra el valor del coeficiente de determinación
+(<span class="math inline">\(R^2\)</span>) que corresponde al porcentaje
+de la variabilidad de <span class="math inline">\(Y\)</span> explicada
+por el modelo. Para el ejemplo <span class="math inline">\(R^{2} =
+0.8227\)</span>. indicando que el modelo explica un 82.27% de la
+variación de <span class="math inline">\(Y\)</span>.</p>
+<p></br></br></p>
+</div>
+<div id="validación-de-supuestos" class="section level2">
+<h2><span style="color:#034a94"><strong>Validación de
+supuestos</strong></span></h2>
+<p></br></br></p>
+<div id="normalidad" class="section level3">
+<h3><span style="color:#034A94"><strong>Normalidad</strong></span></h3>
+<p></br></p>
+<p><span class="math inline">\(H_o: \varepsilon \sim Normal\)</span></p>
+<p><span class="math inline">\(H_a: \varepsilon \hspace{.2cm} \text{ no
+} \sim Normal\)</span></p>
+<p></br></br></p>
+<div id="test-de-shapiro---wilk" class="section level4">
+<h4><span style="color:#686868"><strong>Test de Shapiro -
+Wilk</strong></span></h4>
+<p></br></p>
+<pre class="r"><code>shapiro.test(modelo$residuals)</code></pre>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  modelo$residuals
+W = 0.98394, p-value = 0.3338</code></pre>
+<p></br></br></p>
+</div>
+<div id="test-de-jarque-bera" class="section level4">
+<h4><span style="color:#686868"><strong>Test de
+Jarque-Bera</strong></span></h4>
+<p></br></p>
+<pre class="r"><code># install.packages(&quot;normtets&quot;)
+# devtools::install_github(&quot;UBC-MDS/noRmtest&quot;, build_opts = c(&quot;--no-resave-data&quot;, &quot;--no-manual&quot;))
+# https://cran.r-project.org/src/contrib/Archive/normtest/
+ library(normtest)
+normtest::jb.norm.test(modelo$residuals)</code></pre>
+<pre><code>
+    Jarque-Bera test for normality
+
+data:  modelo$residuals
+JB = 2.081, p-value = 0.2525</code></pre>
+<p></br></br></p>
+</div>
+<div id="test-de-anderson-darling" class="section level4">
+<h4><span style="color:#686868"><strong>Test de
+Anderson-Darling</strong></span></h4>
+<p></br></p>
+<pre class="r"><code># install.packages(&quot;nortets&quot;)
+nortest::ad.test(modelo$residuals)</code></pre>
+<pre><code>
+    Anderson-Darling normality test
+
+data:  modelo$residuals
+A = 0.29771, p-value = 0.5818</code></pre>
+<p></br></br></p>
+</div>
+<div id="test-de-lilliefors-kolmogorov-smirnov" class="section level4">
+<h4><span style="color:#686868"><strong>Test de Lilliefors
+(Kolmogorov-Smirnov)</strong></span></h4>
+<p></br></p>
+<pre class="r"><code>nortest::lillie.test(modelo$residuals)</code></pre>
+<pre><code>
+    Lilliefors (Kolmogorov-Smirnov) normality test
+
+data:  modelo$residuals
+D = 0.0623, p-value = 0.5281</code></pre>
+<p></br></br></p>
+</div>
+</div>
+<div id="varianza-contante" class="section level3">
+<h3><span style="color:#034A94"><strong>Varianza
+contante</strong></span></h3>
+<p></br></p>
+<p><span class="math inline">\(Ho : V[\varepsilon_{i}] =
+\sigma^2\)</span></p>
+<p><span class="math inline">\(Ha : V[\varepsilon_{i}] \neq
+\sigma^2\)</span></p>
+<p></br></br></p>
+<div id="test-de-breusch-pagan" class="section level4">
+<h4><span style="color:#686868"><strong>Test de
+Breusch-Pagan</strong></span></h4>
+<p></br></p>
+<pre class="r"><code>lmtest::bptest(modelo)</code></pre>
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  modelo
+BP = 3.879, df = 1, p-value = 0.04889</code></pre>
+<p></br></br></p>
+</div>
+<div id="test-de-goldfeld-quandt" class="section level4">
+<h4><span style="color:#686868"><strong>Test de
+Goldfeld-Quandt</strong></span></h4>
+<p></br></p>
+<pre class="r"><code>lmtest::gqtest(modelo)</code></pre>
+<pre><code>
+    Goldfeld-Quandt test
+
+data:  modelo
+GQ = 1.1538, df1 = 43, df2 = 43, p-value = 0.3206
+alternative hypothesis: variance increases from segment 1 to 2</code></pre>
+<p></br></br></p>
+</div>
+</div>
+<div id="no-autocorrelación-de-errores" class="section level3">
+<h3><span style="color:#034A94"><strong>No autocorrelación de
+errores</strong></span></h3>
+<p></br></p>
+<p><span class="math inline">\(Ho : E[\varepsilon_{i}, \varepsilon_{j}]
+= 0\)</span></p>
+<p><span class="math inline">\(Ha : E[\varepsilon_{i}, \varepsilon_{j}]
+\neq 0\)</span></p>
+<p></br></p>
+<div id="test-de-durbin-watson" class="section level4">
+<h4><span style="color:#686868"><strong>Test de
+Durbin-Watson</strong></span></h4>
+<p></br></p>
+<pre class="r"><code>lmtest::dwtest(modelo)</code></pre>
+<pre><code>
+    Durbin-Watson test
+
+data:  modelo
+DW = 0.67803, p-value = 1.716e-13
+alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+<p></br></br></p>
+</div>
+</div>
+<div id="transformación-de-variables" class="section level3">
+<h3><span style="color:#034a94"><strong>Transformación de
+variables</strong></span></h3>
+<pre class="r"><code>library(paqueteMETODOS)
+data(&quot;biomasa&quot;)
+modelo1=lm(bio_total ~ diametro, data=biomasa)           # Lin - Lin
+modelo2=lm(bio_total ~ log(diametro), data=biomasa)      # Lin - Log
+modelo3=lm(log(bio_total) ~ diametro, data=biomasa)      # Log - Lin
+modelo4=lm(log(bio_total) ~ log(diametro), data=biomasa) # Log - Log</code></pre>
+<pre class="r"><code>library(stargazer)
+stargazer(modelo1, modelo2, modelo3, modelo4, type=&quot;text&quot;, df=FALSE)</code></pre>
+<pre><code>
+===============================================================
+                                Dependent variable:            
+                    -------------------------------------------
+                          bio_total          log(bio_total)    
+                       (1)        (2)        (3)        (4)    
+---------------------------------------------------------------
+diametro             5.103***              0.278***            
+                     (0.251)               (0.011)             
+                                                               
+log(diametro)                  23.369***              1.344*** 
+                                (1.564)               (0.058)  
+                                                               
+Constant            -9.020***  -19.909***  1.328***   0.618*** 
+                     (1.413)    (2.629)    (0.060)    (0.098)  
+                                                               
+---------------------------------------------------------------
+Observations            90         90         90         90    
+R2                    0.825      0.717      0.887      0.858   
+Adjusted R2           0.823      0.714      0.885      0.857   
+Residual Std. Error   3.435      4.362      0.145      0.162   
+F Statistic         413.961*** 223.224*** 687.562*** 532.232***
+===============================================================
+Note:                               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+<p><br/></p>
+<p>Los mejores indicadores los tiene el modelo (3) : log - lin</p>
+<p><span class="math display">\[\widehat{\log(bio-total_{i})} = 1.328 +
+0.278 \hspace{.3cm} diametro_{i}\]</span></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

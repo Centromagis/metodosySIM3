@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Métodos y Simulación Estadística" />
+
+
+<title> Transformaciones</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"> </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Correlación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso100.html">Análisis de Correlación</a>
+    </li>
+    <li>
+      <a href="recurso110.html">Coeficiente de Pearson</a>
+    </li>
+    <li>
+      <a href="recurso120.html">Otros coeficientes</a>
+    </li>
+    <li>
+      <a href="recurso130.html">Código R - correlación</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso200.html">Modelo de Regresión Lineal Simple</a>
+    </li>
+    <li>
+      <a href="recurso210.html">Estimación Mínimos Cuadrados Ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso220.html">Estimación de Máxima Verosimilitud</a>
+    </li>
+    <li>
+      <a href="recurso230.html">Supuestos del modelo</a>
+    </li>
+    <li>
+      <a href="recurso240.html">Transformaciones</a>
+    </li>
+    <li>
+      <a href="recurso250.html">Código R - estimación</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Predicción
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso300.html">Inferencia sobre el modelo</a>
+    </li>
+    <li>
+      <a href="recurso310.html">Inferencia sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso320.html">Inferencia sobre la variable respuesta</a>
+    </li>
+    <li>
+      <a href="recurso330.html">Código R - inferencia</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Transformaciones</strong></span></h1>
+<h4 class="author">Métodos y Simulación Estadística</h4>
+
+</div>
+
+
+<p></br></br></p>
+<div id="transformación-de-variables" class="section level2">
+<h2><span style="color:#034a94"><strong>Transformación de
+variables</strong></span></h2>
+<p></br></p>
+<p>En algunos casos el modelo lineal no es apropiado para ajustar los
+datos y por tanto no cumple los supuestos sobre los errores. Es
+necesario entonces probar otro tipo de modelo transformando las
+variables.</p>
+<p><img src="recurso240_files/figure-html/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p></br></br></p>
+<p>Dentro de las transformaciones más empleadas están:</p>
+<p></br></p>
+<center>
+<strong>Tabla 3.2</strong> Funciones linealizables
+</center>
+<table>
+<colgroup>
+<col width="32%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">función linealizable</th>
+<th align="left">Transformación</th>
+<th align="left">forma lineal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(y= \beta_{0}
+x^{\beta_{1}}\)</span></td>
+<td align="left"><span class="math inline">\(y^*=\log(y)\)</span>, <span
+class="math inline">\(x^*=log(x)\)</span></td>
+<td align="left"><span class="math inline">\(y^*= \log (\beta_{0}) +
+\beta_{1} x^*\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(y = \beta_{0}
+e^{\beta_{1}x}\)</span></td>
+<td align="left"><span class="math inline">\(y^*=\ln(y)\)</span></td>
+<td align="left"><span class="math inline">\(y^* = \ln(\beta_{0}) +
+\beta_{1} x\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(y = \beta_{0} + \beta_{1}
+log (x)\)</span></td>
+<td align="left"><span class="math inline">\(x^*=\log(x)\)</span></td>
+<td align="left"><span class="math inline">\(y^* = \beta_{0} + \beta_{1}
+x\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(y = \dfrac{x}{\beta_{0}x
+-\beta_{1}}\)</span></td>
+<td align="left"><span class="math inline">\(y^*=\dfrac{1}{y}\)</span>,
+<span class="math inline">\(x^*=\dfrac{1}{x}\)</span></td>
+<td align="left"><span class="math inline">\(y^* = \beta_{0} + \beta_{1}
+x^*\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p><br/><br/></p>
+<center>
+<p><strong>Tabla 3.3</strong> Transformación de variables e
+interpretación de <span class="math inline">\(\beta_{1}\)</span></p>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="39%" />
+<col width="13%" />
+<col width="16%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Modelo</th>
+<th align="left">Regresión</th>
+<th align="center">Variable dependiente</th>
+<th align="center">Variable independiente</th>
+<th align="left">Interpretación de <span
+class="math inline">\(\beta_{1}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>Lin-Lin</code></td>
+<td align="left"><span class="math inline">\(\hspace{.8cm} Y_{i} =
+\beta_{0}+ \beta_{1} X_{i} + \varepsilon_{i}\)</span></td>
+<td align="center"><span class="math inline">\(Y\)</span></td>
+<td align="center"><span class="math inline">\(X\)</span></td>
+<td align="left"><span class="math inline">\(\Delta Y = \beta_{1}
+\hspace{.2cm}\Delta X\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>Lin-Log</code></td>
+<td align="left"><span class="math inline">\(\hspace{.8cm} Y_{i} =
+\beta_{0}+ \beta_{1} \log(X_{i}) + \varepsilon_{i}\)</span></td>
+<td align="center"><span class="math inline">\(Y\)</span></td>
+<td align="center"><span class="math inline">\(\log(X)\)</span></td>
+<td align="left"><span class="math inline">\(\Delta Y = (\beta_{1} /
+100) \% \hspace{.2cm}\Delta X\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Log-Lin</code></td>
+<td align="left"><span class="math inline">\(\hspace{.8cm} \log(Y_{i}) =
+\beta_{0}+ \beta_{1} X_{i} + \varepsilon_{i}\)</span></td>
+<td align="center"><span class="math inline">\(\log(Y)\)</span></td>
+<td align="center"><span class="math inline">\(X\)</span></td>
+<td align="left"><span class="math inline">\(\%\Delta Y = (100
+\beta_{1}) \hspace{.2cm}\Delta X\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>Log-Log</code></td>
+<td align="left"><span class="math inline">\(\hspace{.8cm} \log(Y_{i}) =
+\beta_{0}+ \beta_{1} \log(X_{i}) + \varepsilon_{i}\)</span></td>
+<td align="center"><span class="math inline">\(\log(Y)\)</span></td>
+<td align="center"><span class="math inline">\(\log(X)\)</span></td>
+<td align="left"><span class="math inline">\(\%\Delta Y = \beta_{1}\%
+\hspace{.2cm}\Delta X\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<!--```{r, echo=FALSE, out.width="100%", fig.align = "center"} -->
+<!--knitr::include_graphics("img/interpreta.png") -->
+<!--``` -->
+</center>
+<p></br></br></p>
+<div id="ejemplo" class="section level3">
+<h3><span style="color:#FF7F00"><strong>Ejemplo</strong></span></h3>
+<p></br></p>
+<p><img src="recurso240_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p></br></p>
+<p>Como se puede observar existe una leve curvatura de los puntos que
+permite sospechar que existen mejores ajustes que el de la línea
+recta.</p>
+<p></br></br></p>
+</div>
+<div id="transformación-de-variables-1" class="section level3">
+<h3><span style="color:#034a94"><strong>Transformación de
+variables</strong></span></h3>
+<pre class="r"><code>library(paqueteMETODOS)
+data(&quot;biomasa&quot;)
+modelo1=lm(bio_total ~ diametro, data=biomasa)           # Lin - Lin
+modelo2=lm(bio_total ~ log(diametro), data=biomasa)      # Lin - Log
+modelo3=lm(log(bio_total) ~ diametro, data=biomasa)      # Log - Lin
+modelo4=lm(log(bio_total) ~ log(diametro), data=biomasa) # Log - Log</code></pre>
+<p></br></br></p>
+<pre><code>
+===============================================================
+                                Dependent variable:            
+                    -------------------------------------------
+                          bio_total          log(bio_total)    
+                       (1)        (2)        (3)        (4)    
+---------------------------------------------------------------
+diametro             5.103***              0.278***            
+                     (0.251)               (0.011)             
+                                                               
+log(diametro)                  23.369***              1.344*** 
+                                (1.564)               (0.058)  
+                                                               
+Constant            -9.020***  -19.909***  1.328***   0.618*** 
+                     (1.413)    (2.629)    (0.060)    (0.098)  
+                                                               
+---------------------------------------------------------------
+Observations            90         90         90         90    
+R2                    0.825      0.717      0.887      0.858   
+Adjusted R2           0.823      0.714      0.885      0.857   
+Residual Std. Error   3.435      4.362      0.145      0.162   
+F Statistic         413.961*** 223.224*** 687.562*** 532.232***
+===============================================================
+Note:                               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+<p></br></br></p>
+</div>
+<div id="transformación-box-cox" class="section level3">
+<h3><span style="color:#034a94"><strong>Transformación
+Box-Cox</strong></span></h3>
+<p></br></p>
+<p>La transformación de la variable respuesta <span
+class="math inline">\(Y\)</span> es útil para dar solución a problemas
+tanto de validación de suspuesto como también de mejoras en el nivel de
+ajuste del modelo. Poder detectar cuál de las anteriores trasformaciones
+es la más apropiada podría se un trabajo de error ensayo, probando una a
+una las transformaciones, generando una de manda de tiempo.</p>
+<p>El método de box-cox permite encontrar el valor de <span
+class="math inline">\(\lambda\)</span> óptimo para la función :</p>
+<p><span class="math display">\[g_{\lambda}(y) = \left \{ \begin{matrix}
+\dfrac{y^{\lambda}-1}{y} &amp; \mbox{ si } \lambda \neq 0\\
+                                     &amp;  \\
+                                     log(y)  &amp; \mbox{ si } \lambda
+=0 \end{matrix}\right.\]</span></p>
+<p>El valor <span
+class="math inline">\(\dfrac{y^{\lambda}-1}{y}\)</span> se puede
+simplificar por <span class="math inline">\(y^{\lambda}\)</span> cuando
+el modelo es predictivo. El valor máximo de este valor podrá orientar
+sobre la forma funcional de la variables respuesta.</p>
+<p>La función <code>boxcox()</code>, del paquete <code>MASS</code> nos
+ayuda a encontrar el valor óptimo de <span
+class="math inline">\(\lambda\)</span></p>
+<p>La siguiente tabla nos ayuda a identificar la transformación
+apropiada</p>
+<p></br></br></p>
+<div class="content-box-blue">
+<table style="width:100%;">
+<colgroup>
+<col width="23%" />
+<col width="10%" />
+<col width="10%" />
+<col width="12%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="11%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\lambda
+\hspace{1.5cm}\)</span></td>
+<td align="left">-2</td>
+<td align="left">-1</td>
+<td align="left">-0.5</td>
+<td align="left">0</td>
+<td align="left">0.5</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">Transformación</td>
+<td align="left"><span class="math inline">\(1/y^{2}\)</span></td>
+<td align="left"><span class="math inline">\(1/y\)</span></td>
+<td align="left"><span class="math inline">\(1/\sqrt{y}\)</span></td>
+<td align="left"><span class="math inline">\(log(y)\)</span></td>
+<td align="left"><span class="math inline">\(\sqrt{y}\)</span></td>
+<td align="left"><span class="math inline">\(y\)</span></td>
+<td align="left"><span class="math inline">\(y^{2}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></br></br></p>
+<pre class="r"><code>library(paqueteMETODOS)
+data(biomasa)
+modelo1=lm(bio_total ~ diametro, data=biomasa)
+summary(modelo1)
+par(mfrow = c(1,2))
+boxcox(lm(biomasa$bio_total ~ biomasa$diametro, data=biomasa), lambda = -3:3)
+#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+bc&lt;-boxcox(lm(biomasa$bio_total ~ biomasa$diametro), lambda = -1:1)
+(lambda &lt;- bc$x[which.max(bc$y)])</code></pre>
+<p><img src="img/box_cox.png" width="100%" style="display: block; margin: auto;" /></p>
+<center>
+<strong>Figura 3.10</strong> Valor optimo de <span
+class="math inline">\(\lambda\)</span>
+</center>
+<p><br/><br/></p>
+<p>El resultado (<span class="math inline">\(\lambda =0\)</span>) indica
+que la variable dependiente debe estar en escala logarítmica</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+---
+title: <span style="color:#034a94"> **Modelo de Regresión Lineal Simple**</span>
+author: "Métodos y Simulación Estadística"
+output:
+  html_document:
+    code_folding: hide
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+library(ggplot2)
+library(paqueteMETODOS)
+data(biomasa)
+modelo=lm(log(bio_total) ~ diametro, data=biomasa)
+```
+
+</br></br>
+
+# <span style="color:#034a94">**¿Qué es el análisis de regresión?**</span>
+
+</br>
+
+El análisis de regresión es la búsqueda de una expresión matemçatica que permita predecir los valores de una variable a través del conocimiento de los valores de otra. La relación entre las dos variables puede ser representada mediante la línea recta de mejor ajuste a los datos. Esta línea se denomina recta de regresión o modelo de regresión simple.
+
+Para este análisis se dispone de una muestra de $n$ pares de observaciones de una variable $Y$, que se llamaá variable dependiente, la cual debe estar correlacionada con otra variable $X$, que se llamará variable independiente $(x_{1},y_{1}), (x_{2},y_{2}),(x_{3},y_{3}), ...,(x_{n},y_{n})$.
+
+</br></br>
+
+### <span style="color:#FF7F00">**Ejemplos**</span> 
+
+</br>
+
+* Si una empresa gasta 10 millones al año en publicidad, ¿Cuánto podrían ser sus ingresos anuales por ventas?
+* Si una persona tiene una estatura de 170 centímetros, ¿Cuánto podría ser su peso?
+* Si una estudiante le dedica 30 horas al estudio del próximo examen de estadística, ¿Cuánto podría ser la calificación obtenida en dicha prueba?
+* Para un futuro empresario que quiere vender 500 unidades de un producto, ¿Cuánto podría ser el precio esperado de cada unidad?
+* ¿Cuántas computadoras se venderían al mes?, si un vendedor realiza 50 llamadas a diferentes empresas.
+* Si el precio de un producto se aumenta un $2000, cuanto se espera se reduzca su demanda?
+
+</br>
+
+El establecimiento de la correlación entre las dos variables es importante, pero esto se considera un primer paso para predecir una variable a partir de la otra. Claro está, si sabe que la variable $X$ está muy relacionada con $Y$ , ello quiere decir que se puede predecir $Y$ a partir de $X$.  Se está ya en el terreno de la predicción . (Evidentemente si, $X$ no está correlacionada con $Y$, la variable $X$ no sirve como predictora de $Y$).
+
+</br></br>
+
+## <span style="color:#034a94">**La ecuación de la recta de regresión**</span>
+
+</br>
+
+
+<div class="content-box-blue">
+
+$$Y = \beta_{0} + \beta_{1} X +  \varepsilon $$
+</div>
+Donde :
+
+* $Y$ : variable dependiente o respuesta
+* $X$ : variable independiente  o regresora, la cual se supone conocida
+* $\varepsilon$ : error, variable aleatoria desconocida y que representa todas aquellas variables que no estan en el modelo
+* $\beta_{0}$ : coeficiente a estimar, llamado intercepto
+* $\beta_{1}$ : coeficiente a estimar, llamado pendiente
+
+$\beta_{0}$ y $\beta_{1}$ conforman los parámetros a estimar con conforman la recta:
+
+
+$$\widehat{y_{i}} = \widehat{\beta}_{0} + \widehat{\beta}_{1} x_i$$
+
+
+
+</br></br>
+
+El objetivo principal se centra en :
+
+* predecir el valor de la variable dependiente $Y$ a partir de un valor de la variable independiente $X$
+* estimar el valor de la pendiente $\beta_{1}$, lo que permite valorar el efecto generado sobre la variable dependiente $Y$, al realizar cambios en la variable independiente $X$
+
+</br></br>
+
+### <span style="color:#FF7F00">**Ejemplo**</span> 
+
+</br>
+
+Se requiere estimar la cantidad de biomasa contenida en un bosque, para lo cual se construye un modelo que permite estimar el valor de la biomasa para un árbol utilizando para ello el diámetro del árbol
+
+
+```{r, echo = F, message = F, fig.align = 'center', out.width = '70%'}
+data(biomasa) 
+ggplot(biomasa, aes(x=altura , y=bio_total))+
+  geom_point(size=2, colour=c3)+
+  labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
+```
+<center>
+**Figura 3.8** Ddiagrama de dispersión total biomasa y altura
+</center>
+
+</br>
+
+Se observa en el diagrama que existe una relación lineal  positiva fuerte entre las dos variables, indicando que entre mayor sea la altura del árbol, mayor será la biomasa
+
+</br></br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
