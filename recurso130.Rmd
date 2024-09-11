@@ -2,9 +2,9 @@
 title: <span style="color:#034a94"> **Código R - Correlación**</span>
 author: "Métodos y Simulación Estadística"
 output:
-  html_document:
-    code_folding: hide
-    css: style.css
+html_document:
+code_folding: hide
+css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -26,27 +26,27 @@ library(paqueteMETODOS) # activa paqueteMET
 data("biomasa") # carga la base biomasa
 
 gen.corr.data<- function(rho,n){
-x <- rnorm(n)
-z <- rnorm(n)
-y<- rho*x + sqrt(1-rho^2)*z
-result <-cbind(y,x)
-return(result)
+	x <- rnorm(n)
+	z <- rnorm(n)
+	y<- rho*x + sqrt(1-rho^2)*z
+	result <-cbind(y,x)
+	return(result)
 }
 #-------------------------------------------------------------------------
 library(ggplot2)
 library(patchwork)
 Theme1= theme(axis.text.x = element_blank(),
-        axis.text.y = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title.x = element_text(size = 12),
-        axis.title.y = element_text(size = 12))
+axis.text.y = element_blank(),
+axis.ticks = element_blank(),
+axis.title.x = element_text(size = 12),
+axis.title.y = element_text(size = 12))
 #------------------------------------------------------------------------
 Theme2= theme(
-        #axis.text.x = element_blank(),
-        #axis.text.y = element_blank(),
-        #axis.ticks = element_blank(),
-        axis.title.x = element_text(size = 11),
-        axis.title.y = element_text(size = 11))
+#axis.text.x = element_blank(),
+#axis.text.y = element_blank(),
+#axis.ticks = element_blank(),
+axis.title.x = element_text(size = 11),
+axis.title.y = element_text(size = 11))
 
 data(biomasa)
 biomasa38=biomasa[,3:8]
@@ -77,15 +77,15 @@ tabla <- table(X, Y)
 $$
 \mathbf{V} =
 \begin{bmatrix}
-  \sigma_{1}^2 & \sigma_{12} & \sigma_{13} & \ldots & \sigma_{1n} \\
-  \sigma_{21} & \sigma_{2}^2 & \sigma_{23} & \ldots & \sigma_{2n} \\
-  \sigma_{31} & \sigma_{32} & \sigma_{3}^2 & \ldots & \sigma_{3n} \\
-  \vdots & \vdots & \vdots & \ddots & \vdots \\
-  \sigma_{n1} & \sigma_{n2} & \sigma_{n3} & \ldots & \sigma_{n}^2 \\
+	\sigma_{1}^2 & \sigma_{12} & \sigma_{13} & \ldots & \sigma_{1n} \\
+	\sigma_{21} & \sigma_{2}^2 & \sigma_{23} & \ldots & \sigma_{2n} \\
+	\sigma_{31} & \sigma_{32} & \sigma_{3}^2 & \ldots & \sigma_{3n} \\
+	\vdots & \vdots & \vdots & \ddots & \vdots \\
+	\sigma_{n1} & \sigma_{n2} & \sigma_{n3} & \ldots & \sigma_{n}^2 \\
 \end{bmatrix}
 $$
 
-Esta matriz simétrica presenta las varianzas de las variables en su diagonal principal y las covarianzas por fuera de ella, siendo tambien una matriz diagonal.
+Esta matriz simétrica presenta las varianzas de las variables en su diagonal principal y las covarianzas por fuera de ella, siendo también una matriz diagonal.
 
 Donde:
 
@@ -101,7 +101,7 @@ library(paqueteMETODOS)
 data(biomasa) # data contenida en  paqueteMET
 head(biomasa) # primeros 6 registros de la data
 cov(biomasa[,3:8]) %>%  # matriz de correlaciones 
-  round(.,3      )
+round(.,3      )
 ```
 </br></br></br>
 
@@ -110,7 +110,7 @@ Para presentar el código para los diferentes indicadores utilizamos la base de 
 
 ```{r}
 library(paqueteMETODOS)
-data(biomasa) # data contenida en  paqueteMET
+data(biomasa) # data contenida en  paqueteMETODOS
 head(biomasa) # primeros 6 registros de la data
 ```
 
@@ -129,7 +129,7 @@ Presenta las correlaciones entre pares de variables $\rho_{x_i,x_j} = \rho_{x_j,
 library(paqueteMETODOS)
 data(biomasa) # data contenida en  paqueteMETODOS
 cor(biomasa[,3:8]) %>%  # matriz de correlaciones 
-  round(.,3      )
+round(.,3      )
 ```
 
 
@@ -163,7 +163,7 @@ Para mostrar el calculo de los indicadores de correlación Phi y V de Cramer uti
 ```{r}
 library(tidyverse)
 tabla = c(80,9,30,21) %>% 
-           matrix(., nrow = 2) 
+matrix(., nrow = 2) 
 colnames(tabla)=c("Africa", "America")
 rownames(tabla)=c("si", "no")
 
@@ -198,5 +198,4 @@ cat("Coeficiente Phi         :", Phi(tabla), "\n")
 library(DescTools)
 cat("Coeficiente V de Cramer :", CramerV(tabla)) 
 ```
-
 

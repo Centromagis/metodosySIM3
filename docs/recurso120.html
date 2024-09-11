@@ -14,7 +14,7 @@
 
 <title>Otros indicadores de correlación</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -31,7 +31,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -219,9 +218,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -327,14 +323,6 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94"><strong>Otros
@@ -404,7 +392,7 @@ head(biomasa) # primeros 6 registros de la data</code></pre>
 5 FINCA_1 GENOTIPO_1      5.58    1.41      6.99        22.5      2.2    3.3
 6 FINCA_1 GENOTIPO_2     18.5     0.84     19.3         34.2      6.3    7.9</code></pre>
 <pre class="r"><code>cor(biomasa[,3:8]) %&gt;%  # matriz de correlaciones 
-  round(.,3      )</code></pre>
+round(.,3      )</code></pre>
 <pre><code>            bio_aerea bio_sub bio_total area_foliar diametro altura
 bio_aerea       1.000  -0.561     0.999       0.865    0.914  0.861
 bio_sub        -0.561   1.000    -0.534      -0.590   -0.652 -0.550
@@ -418,7 +406,7 @@ altura          0.861  -0.550     0.858       0.572    0.936  1.000</code></pre>
 <h3><span style="color:#686868"><strong>Nota</strong></span></h3>
 <p></br></p>
 <ul>
-<li>Los resultados se presenta como matriz simetrica que tiene identicos
+<li>Los resultados se presenta como matriz simétrica que tiene idénticos
 valores arriba y debajo de la diagonal. (<span
 class="math inline">\(\rho_{ij} = \rho_{ji}\)</span>)</li>
 <li>Los valores de la diagonal son unos, debido a que <span
@@ -441,7 +429,7 @@ entre cada par de variables y su significancia sobre la prueba de
 hipótesis <span class="math inline">\(Ho: \rho =0\)</span> frente a
 <span class="math inline">\(Ha: \rho \neq 0\)</span>.</p>
 <p>En este caso todos los valores obtenidos son significativamente
-diferententes de cero.</p>
+diferentes de cero.</p>
 <p></br></br></p>
 <p>Para el caso de variables cualitativas podemos utilizar los
 coeficientes <span class="math inline">\(Phi\)</span> o el de <span
@@ -450,7 +438,7 @@ contingencia o de doble entrada, por ejemplo:</p>
 <p></br></p>
 <pre>
 tabla = c(80,9,30,21) %>% 
-           matrix(., nrow = 2) 
+matrix(., nrow = 2) 
 colnames(tabla)=c("Africa", "America")
 rownames(tabla)=c("si", "no")
 
@@ -485,7 +473,7 @@ class="math inline">\(2 \times 2\)</span></p>
 </div>
 <ul>
 <li><p>Se aplica a tablas de contingencia 2x2</p></li>
-<li><p>Si los elementos estan concentrados en la diagonal de la tabla de
+<li><p>Si los elementos están concentrados en la diagonal de la tabla de
 contingencia, su valor será positivo, mientras que si se salen de esta
 diagonal su valor será negativo.</p></li>
 <li><p>Está relacionado con el estadístico chi-cuadrado de las tablas de
@@ -527,7 +515,7 @@ class="math inline">\(0.6\)</span></li>
 tabla <span class="math inline">\(k\)</span> : menor valor entre el
 número de filas menos 1 y el número de columnas menos 1</p>
 <ul>
-<li>Volor de cero indica que no hay relación entre las variables</li>
+<li>Valor de cero indica que no hay relación entre las variables</li>
 <li>Valor de uno indica que existe una relación perfecta</li>
 <li>Valores entre 0.6 y 1 , indica que existe una relación fuerte entre
 las variables</li>
@@ -576,11 +564,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

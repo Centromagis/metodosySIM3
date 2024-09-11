@@ -14,7 +14,7 @@
 
 <title> Predicción de la variable respuesta</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -31,7 +31,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -219,9 +218,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -327,14 +323,6 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
@@ -390,12 +378,13 @@ E\left[\widehat\beta_1\right]x_0 = \beta_0 + \beta_1x_0 = E[Y\vert x_0]
 <p>y su varianza:</p>
 <p><span class="math display">\[
 \begin{aligned}
-{V\left[\widehat{Y}_0\right]} &amp;= {V\left[\sum^n_{i=1} (m_i + x_0\,
-c_i) Y_i\right]} = {\sum^n_{i=1} (m_i + x_0\, c_i)^2\ V(Y_i)}\nonumber\\
-&amp;= {\sigma^2\sum^n_{i=1} \left[\left(\frac{1}{n} -
+    {V\left[\widehat{Y}_0\right]} &amp;= {V\left[\sum^n_{i=1} (m_i +
+x_0\, c_i) Y_i\right]} = {\sum^n_{i=1} (m_i + x_0\, c_i)^2\
+V(Y_i)}\nonumber\\
+    &amp;= {\sigma^2\sum^n_{i=1} \left[\left(\frac{1}{n} -
 \bar{x}c_i\right)+x_0c_i\right]^2} = {\sigma^2\sum^n_{i=1}
 \left[\frac{1}{n} + (x_0-\bar{x}) c_i\right]^2}\nonumber\\
-&amp;= {\sigma^2\left[\frac{1}{n} +
+    &amp;= {\sigma^2\left[\frac{1}{n} +
 \frac{(x_0-\bar{x})^2}{S_{xx}}\right]}
 \end{aligned}
 \]</span></p>
@@ -541,8 +530,8 @@ hipótesis:</p>
 <p></br></p>
 <p><span class="math display">\[
 \begin{aligned}
-{H_0:\ E[Y\vert x_0] = c_0}\nonumber\\
-{H_1:\ E[Y\vert x_0] \neq c_0}\nonumber
+    {H_0:\ E[Y\vert x_0] = c_0}\nonumber\\
+    {H_1:\ E[Y\vert x_0] \neq c_0}\nonumber
 \end{aligned}
 \]</span></p>
 <p></br></p>
@@ -621,9 +610,10 @@ class="math inline">\(100.3\)</span> ton.</li>
 </ul>
 <p></br></p>
 <ul>
-<li><span class="math inline">\((83.04478 \hspace{0.2cm},\hspace{0.2cm}
-103.0178)\)</span> : Con una confianza del 95% el promedio de biomasa de
-un árbol que tiene diámetro de 2 cm está entre : 83 y 103 ton.</li>
+<li><span class="math inline">\((83.04478
+\hspace{0.2cm},\hspace{0.2cm}  103.0178)\)</span> : Con una confianza
+del 95% el promedio de biomasa de un árbol que tiene diámetro de 2 cm
+está entre : 83 y 103 ton.</li>
 </ul>
 </div>
 </div>
@@ -662,11 +652,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -14,7 +14,7 @@
 
 <title> Predicción de parámetros o coeficientes</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -31,7 +31,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -219,9 +218,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -327,14 +323,6 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
@@ -434,7 +422,7 @@ class="math inline">\({|T_0| &gt; t_{\alpha/2, n - 2}}\)</span>.</p>
 <p>La pendiente <span class="math inline">\(\beta_{1}\)</span> permite
 determinar la razón de cambio de la variable <span
 class="math inline">\(Y\)</span> cuando ocurren cambios en <span
-class="math inline">\(X\)</span>, que en ocaciones es el cetro del
+class="math inline">\(X\)</span>, que en ocasiones es el cetro del
 problema de al estimar un modelo de regresión. Si este valor es igual a
 cero estadísticamente significa que no existe relación estadística entre
 las variables y por tanto no tiene sentido la construcción de un modelo
@@ -550,7 +538,7 @@ class="math inline">\(H_o :\beta_{1} = 0\)</span>) se rechazan dado que
 el valor-p en cada caso es cero</li>
 <li>El intervalo de confianza para la pendiente <span
 class="math inline">\(\beta_{1}\)</span> se puede interpretar como: Por
-cada unidad aducional (cm) en el diámetro del árbol, la cantidad de
+cada unidad adicional (cm) en el diámetro del árbol, la cantidad de
 biomasa total estimada aumenta entre 4.6 y 5.6 ton con una confianza del
 95%</li>
 </ul>
@@ -598,11 +586,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

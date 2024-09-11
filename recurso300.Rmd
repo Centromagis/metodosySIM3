@@ -2,9 +2,9 @@
 title: <span style="color:#034a94"> **Predicción con el modelo de RLS**</span>
 author: "Métodos y Simulación Estadística"
 output:
-  html_document:
-    code_folding: hide
-    css: style.css
+html_document:
+code_folding: hide
+css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -31,7 +31,7 @@ modelo=lm(log(bio_total) ~ diametro, data=biomasa)
 
 Después de estimar el modelo por el método de MCO y haber verificado el cumplimiento de los supuestos podemos realizar inferencias sobre los resultados obtenidos.
 
-En este caso es posible que estemos ineresados en estimar el valor de la mendiente o el intercepto, pero además requerimos realizar pruebas de hipotesis sobre los valores estimados y sobre los valores pronosticados.
+En este caso es posible que estemos interesados en estimar el valor de la pendiente o el intercepto, pero además requerimos realizar pruebas de hipótesis sobre los valores estimados y sobre los valores pronosticados.
 
 </br>
 
@@ -50,16 +50,16 @@ Estos resultados están basados en la distribución normal de los errores, la ex
 knitr::include_graphics("img/distribuciones.png")
 ```
 <center>
-**Figura 3.11** Relación entre distirbuciones muestrales
+**Figura 3.11** Relación entre distribuciones muestrales
 </center>
 
 </br></br>
 
-Se parte de una variable condistribución normal $X$, con media $\mu$ y varianza $\sigma^2$. Esta variable se puede estandarizar, restandole su media y dividiendola por su desviación estandar, transformandola en otra variable denominada $Z$. A esta variable se le denomina normal estandar dado que tiene media cero y varianza uno. 
+Se parte de una variable con distribución normal $X$, con media $\mu$ y varianza $\sigma^2$. Esta variable se puede estandarizar, restandole su media y dividiendola por su desviación estándar, transformándola en otra variable denominada $Z$. A esta variable se le denomina normal estándar dado que tiene media cero y varianza uno. 
 
-La suma de $n$ variables normales estandar, cada una de ellas elevadas al cuadrado, originan una variable $\chi^2$ (chi-cuadrado). 
+La suma de $n$ variables normales estándar, cada una de ellas elevadas al cuadrado, originan una variable $\chi^2$ (chi-cuadrado). 
 
-La razón de una variable normal estandar con la raiz cuadrada de una variable chi-cuadrado sobre sus grados de libertad, da origen a un variable T con distribución t-Student.
+La razón de una variable normal estándar con la raiz cuadrada de una variable chi-cuadrado sobre sus grados de libertad, da origen a un variable T con distribución t-Student.
 
 Por último la razón de dos variables chi-cuadrado, origina una variable F con distribución F-Fisher
 

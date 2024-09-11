@@ -14,7 +14,7 @@
 
 <title> Predicción con el modelo de RLS</title>
 
-<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -31,7 +31,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -219,9 +218,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -327,14 +323,6 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
@@ -348,9 +336,9 @@ $(document).ready(function () {
 <p>Después de estimar el modelo por el método de MCO y haber verificado
 el cumplimiento de los supuestos podemos realizar inferencias sobre los
 resultados obtenidos.</p>
-<p>En este caso es posible que estemos ineresados en estimar el valor de
-la mendiente o el intercepto, pero además requerimos realizar pruebas de
-hipotesis sobre los valores estimados y sobre los valores
+<p>En este caso es posible que estemos interesados en estimar el valor
+de la pendiente o el intercepto, pero además requerimos realizar pruebas
+de hipótesis sobre los valores estimados y sobre los valores
 pronosticados.</p>
 <p></br></p>
 <ul>
@@ -361,8 +349,8 @@ class="math inline">\(\beta_{1}\)</span>).</p></li>
 class="math inline">\(\beta_{0}\)</span> y <span
 class="math inline">\(\beta_{1}\)</span>, con el fin de validar si los
 valores estimados a partir de la muestra son estadísticamente
-significativos (<span class="math inline">\(Ho: \beta_{i} =0\)</span> vs
-<span class="math inline">\(Ha: \beta_{i} \neq 0\)</span>).</p></li>
+significativos (<span class="math inline">\(Ho:  \beta_{i} =0\)</span>
+vs <span class="math inline">\(Ha: \beta_{i} \neq 0\)</span>).</p></li>
 <li><p>Intervalos de confianza sobre la respuesta media para un
 determinado valor de la variable independiente (<span
 class="math inline">\(\widehat{y_{i}}\)</span>)</p></li>
@@ -376,21 +364,21 @@ independientes)</p>
 <p></br></p>
 <img src="img/distribuciones.png" width="100%" style="display: block; margin: auto;" />
 <center>
-<strong>Figura 3.11</strong> Relación entre distirbuciones muestrales
+<strong>Figura 3.11</strong> Relación entre distribuciones muestrales
 </center>
 <p></br></br></p>
-<p>Se parte de una variable condistribución normal <span
+<p>Se parte de una variable con distribución normal <span
 class="math inline">\(X\)</span>, con media <span
 class="math inline">\(\mu\)</span> y varianza <span
 class="math inline">\(\sigma^2\)</span>. Esta variable se puede
 estandarizar, restandole su media y dividiendola por su desviación
-estandar, transformandola en otra variable denominada <span
+estándar, transformándola en otra variable denominada <span
 class="math inline">\(Z\)</span>. A esta variable se le denomina normal
-estandar dado que tiene media cero y varianza uno.</p>
+estándar dado que tiene media cero y varianza uno.</p>
 <p>La suma de <span class="math inline">\(n\)</span> variables normales
-estandar, cada una de ellas elevadas al cuadrado, originan una variable
+estándar, cada una de ellas elevadas al cuadrado, originan una variable
 <span class="math inline">\(\chi^2\)</span> (chi-cuadrado).</p>
-<p>La razón de una variable normal estandar con la raiz cuadrada de una
+<p>La razón de una variable normal estándar con la raiz cuadrada de una
 variable chi-cuadrado sobre sus grados de libertad, da origen a un
 variable T con distribución t-Student.</p>
 <p>Por último la razón de dos variables chi-cuadrado, origina una
@@ -432,11 +420,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
