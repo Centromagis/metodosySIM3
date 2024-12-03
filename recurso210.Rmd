@@ -52,7 +52,7 @@ knitr::include_graphics("img/plotlm1.png")
 
 <br/><br/>
 
-La diferencia entre el valor de $y$ asociado con un valor de $x_{0}$ y el valor estimado por la recta de regresión $\widehat{y}_{0}$ se denomina **resudual** y constituye una muestra de la variable aleatoria $\varepsilon$ 
+La diferencia entre el valor de $y$ asociado con un valor de $x_{0}$ y el valor estimado por la recta de regresión $\widehat{y}_{0}$ se denomina **residual** y constituye una muestra de la variable aleatoria $\varepsilon$ 
 
 </br>
 <div class="content-box-blue">
@@ -90,7 +90,7 @@ $$\sum_{i=1}^{n} y_{i} = n \widehat{\beta}_{0} + \widehat{\beta}_{1} \sum_{i=1}^
 $$\sum_{i=1}^{n} y_{i} x_{i}= n \widehat{\beta}_{0} x_{i}+ \widehat{\beta}_{1} \sum_{i=1}^{n} x_{i}^{2}$$
 </br></br>
 
-Convirtiendose en el sistema :
+Convirtiéndose en el sistema :
 
 
 $$

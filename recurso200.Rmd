@@ -27,9 +27,9 @@ modelo=lm(log(bio_total) ~ diametro, data=biomasa)
 
 </br>
 
-El análisis de regresión es la búsqueda de una expresión matemçatica que permita predecir los valores de una variable a través del conocimiento de los valores de otra. La relación entre las dos variables puede ser representada mediante la línea recta de mejor ajuste a los datos. Esta línea se denomina recta de regresión o modelo de regresión simple.
+El análisis de regresión es la búsqueda de una expresión matemática que permita predecir los valores de una variable a través del conocimiento de los valores de otra. La relación entre las dos variables puede ser representada mediante la línea recta de mejor ajuste a los datos. Esta línea se denomina recta de regresión o modelo de regresión simple.
 
-Para este análisis se dispone de una muestra de $n$ pares de observaciones de una variable $Y$, que se llamaá variable dependiente, la cual debe estar correlacionada con otra variable $X$, que se llamará variable independiente $(x_{1},y_{1}), (x_{2},y_{2}),(x_{3},y_{3}), ...,(x_{n},y_{n})$.
+Para este análisis se dispone de una muestra de $n$ pares de observaciones de una variable $Y$, que se llamará variable dependiente, la cual debe estar correlacionada con otra variable $X$, que se llamará variable independiente $(x_{1},y_{1}), (x_{2},y_{2}),(x_{3},y_{3}), ...,(x_{n},y_{n})$.
 
 </br></br>
 
@@ -63,7 +63,7 @@ Donde :
 
 * $Y$ : variable dependiente o respuesta
 * $X$ : variable independiente  o regresora, la cual se supone conocida
-* $\varepsilon$ : error, variable aleatoria desconocida y que representa todas aquellas variables que no estan en el modelo
+* $\varepsilon$ : error, variable aleatoria desconocida y que representa todas aquellas variables que no están en el modelo
 * $\beta_{0}$ : coeficiente a estimar, llamado intercepto
 * $\beta_{1}$ : coeficiente a estimar, llamado pendiente
 
@@ -87,7 +87,7 @@ El objetivo principal se centra en :
 
 </br>
 
-Se requiere estimar la cantidad de biomasa contenida en un bosque, para lo cual se construye un modelo que permite estimar el valor de la biomasa para un árbol utilizando para ello el diámetro del árbol
+Se requiere estimar la cantidad de biomasa contenida en un bosque, para lo cual se construye un modelo que permite estimar el valor de la biomasa para un árbol utilizando para ello el diámetro del árbol.
 
 
 ```{r, echo = F, message = F, fig.align = 'center', out.width = '70%'}
@@ -97,7 +97,7 @@ ggplot(biomasa, aes(x=altura , y=bio_total))+
   labs(title = "", y= "biomasa total (tn) ", x= "altura (m) ") 
 ```
 <center>
-**Figura 3.8** Ddiagrama de dispersión total biomasa y altura
+**Figura 3.8** Diagrama de dispersión total biomasa y altura
 </center>
 
 </br>

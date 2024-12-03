@@ -14,7 +14,7 @@
 
 <title> Estimación de Máxima Verosimilitud</title>
 
-<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -31,6 +31,7 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -218,6 +219,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -323,6 +327,14 @@ $(document).ready(function () {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
@@ -390,7 +402,7 @@ class="math inline">\(\log (L(\beta_{0}, \beta_{1},
 <p>Al derivar la función e igualarlo a cero tenemos</p>
 <p><span class="math display">\[
 \begin{aligned}
-    \dfrac{\partial}{\partial \beta_{0}} \log (L) &amp;=&amp;
+\dfrac{\partial}{\partial \beta_{0}} \log (L) &amp;=&amp;
 \dfrac{1}{\sigma_{\varepsilon}} \sum_{i=1}^{n} (y_{i} - \beta_{0} -
 \beta_{1} x_{i}) \hspace{.2cm} = 0  \hspace{.5cm}\text{(3)}
 \end{aligned}
@@ -398,13 +410,13 @@ class="math inline">\(\log (L(\beta_{0}, \beta_{1},
 <p></br></br></p>
 <p><span class="math display">\[
 \begin{aligned}
-    \dfrac{\partial}{\partial \beta_{1}} \log (L) &amp;=&amp;
+\dfrac{\partial}{\partial \beta_{1}} \log (L) &amp;=&amp;
 \dfrac{1}{\sigma_{\varepsilon}} \sum_{i=1}^{n} (y_{i} - \beta_{0} -
 \beta_{1} x_{i}) x_{i} = 0  \hspace{.5cm}\text{(4)}
 \end{aligned}
 \]</span></p>
 <p></br></br></p>
-<p>Que conincide con las ecuaciones normales <span
+<p>Que coincide con las ecuaciones normales <span
 class="math inline">\((1)\)</span> y <span
 class="math inline">\((2)\)</span> .</p>
 <p>En conclusión la solución obtenida por el método de mínimos cuadrados
@@ -415,7 +427,7 @@ y la obtenida por el método de máxima verosimilitud son iguales</p>
 <div class="content-box-blue">
 <p><span class="math display">\[
 \begin{aligned}
-    \widehat\beta_{0} &amp; = &amp;   \bar{y} - \widehat{\beta}_{1}
+\widehat\beta_{0} &amp; = &amp;   \bar{y} - \widehat{\beta}_{1}
 \bar{x}\\
 \end{aligned}
 \]</span></p>
@@ -426,7 +438,7 @@ y la obtenida por el método de máxima verosimilitud son iguales</p>
 <div class="content-box-blue">
 <p><span class="math display">\[
 \begin{aligned}
-    \widehat\beta_{1} &amp; =  \dfrac{n \displaystyle\sum_{i=1}
+\widehat\beta_{1} &amp; =  \dfrac{n \displaystyle\sum_{i=1}
 x_{i}y_{i}  - \displaystyle\sum_{i=1}^{n}
 x_{i}  \displaystyle\sum_{i=1}^{n} y_{i}}{n \displaystyle\sum_{i=1}^{n}
 x_{i}^{2} - \bigg(\displaystyle\sum_{i=1}^{n}  x_{i}\bigg)^{2}} &amp;   
@@ -470,6 +482,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

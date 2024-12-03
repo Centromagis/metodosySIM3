@@ -14,7 +14,7 @@
 
 <title> Supuestos del modelo</title>
 
-<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -357,9 +357,9 @@ supuestos:</p>
 class="math inline">\((\varepsilon_{i} \sim N(0, \sigma^2))\)</span></p>
 <p></br></p>
 </div>
-<div id="homoscedasticidad" class="section level3">
+<div id="homocedasticidad" class="section level3">
 <h3><span
-style="color:#034A94"><strong>Homoscedasticidad</strong></span></h3>
+style="color:#034A94"><strong>Homocedasticidad</strong></span></h3>
 <p>La varianza al rededor de la linea de regresión, para cualquier valor
 constante (<span class="math inline">\(V[\varepsilon] =
 \sigma^2\)</span>)</p>
@@ -369,7 +369,7 @@ constante (<span class="math inline">\(V[\varepsilon] =
 <h3><span style="color:#034A94"><strong>Linealidad</strong></span></h3>
 <p>La relación entre la variable dependiente y las variables
 independientes y el error es lineal. Es decir que las variables pueden
-tener cualquier forma pero los parametros deben garantizar una relacion
+tener cualquier forma pero los parámetros deben garantizar una relación
 lineal (<span class="math inline">\(y_{i}= \beta_{0}+ \beta_{1} x_{i} +
 \varepsilon_{i}\)</span>)</p>
 <p></br></p>
@@ -378,7 +378,7 @@ lineal (<span class="math inline">\(y_{i}= \beta_{0}+ \beta_{1} x_{i} +
 <h3><span style="color:#034A94"><strong>No
 autocorrelación</strong></span></h3>
 <p>Los errores que corresponden a diferentes individuos o diferentes
-tiempo deben ser independintes unos de otros (<span
+tiempo deben ser independientes unos de otros (<span
 class="math inline">\(Cov[\varepsilon_{i},  \varepsilon_{j}] =
 0\)</span>)</p>
 <p></br></p>
@@ -393,9 +393,9 @@ coeficientes</p>
 <p></br></p>
 <ul>
 <li>Normalidad : <code>shapiro.test()</code></li>
-<li>Homoscedasticidad : <code>lmtest::bptest()</code></li>
+<li>Homocedasticidad : <code>lmtest::bptest()</code></li>
 <li>No autocorrelación : <code>lmtest::dwtest()</code></li>
-<li>outliers : visualización gráfica - <code>boxplot()</code>,
+<li>Outliers : visualización gráfica - <code>boxplot()</code>,
 <code>plot()</code></li>
 </ul>
 </div>

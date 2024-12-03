@@ -2,9 +2,9 @@
 title: <span style="color:#034a94"> **Transformaciones**</span>
 author: "Métodos y Simulación Estadística"
 output:
-html_document:
-code_folding: hide
-css: style.css
+  html_document:
+    code_folding: hide
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -54,32 +54,32 @@ df <- data.frame(x, y1, y2, y3, y4)
 
 # Crear el gráfico de 2x2
 p1 <- ggplot(df, aes(x)) +
-geom_line(aes(y = y1), color =  "#FF7F00", linetype = "solid", size = 2) +
-labs(title = expression(paste("Función ", y == beta[0]*x^beta[1])),
-x = "x",
-y = "y") +
-theme_minimal()
+  geom_line(aes(y = y1), color =  "#FF7F00", linetype = "solid", size = 2) +
+  labs(title = expression(paste("Función ", y == beta[0]*x^beta[1])),
+       x = "x",
+       y = "y") +
+  theme_minimal()
 
 p2 <- ggplot(df, aes(x)) +
-geom_line(aes(y = y2), color = "#FF7F00", linetype = "solid", size = 2) +
-labs(title = expression(paste("Función ", y == beta[0]*e^(beta[1]*x))),
-x = "x",
-y = "y") +
-theme_minimal()
+  geom_line(aes(y = y2), color = "#FF7F00", linetype = "solid", size = 2) +
+  labs(title = expression(paste("Función ", y == beta[0]*e^(beta[1]*x))),
+       x = "x",
+       y = "y") +
+  theme_minimal()
 
 p3 <- ggplot(df, aes(x)) +
-geom_line(aes(y = y3), color =  "#FF7F00", linetype = "solid", size = 2) +
-labs(title = expression(paste("Función ", y == beta[0] + beta[1]*log(x))),
-x = "x",
-y = "y") +
-theme_minimal()
+  geom_line(aes(y = y3), color =  "#FF7F00", linetype = "solid", size = 2) +
+  labs(title = expression(paste("Función ", y == beta[0] + beta[1]*log(x))),
+       x = "x",
+       y = "y") +
+  theme_minimal()
 
 p4 <- ggplot(df, aes(x)) +
-geom_line(aes(y = y4), color =  "#FF7F00", linetype = "solid", size = 2) +
-labs(title = expression(paste("Función ", y == frac(x, beta[0]*x - beta[1]))),
-x = "x",
-y = "y") +
-theme_minimal()
+  geom_line(aes(y = y4), color =  "#FF7F00", linetype = "solid", size = 2) +
+  labs(title = expression(paste("Función ", y == frac(x, beta[0]*x - beta[1]))),
+       x = "x",
+       y = "y") +
+  theme_minimal()
 
 # Organizar los gráficos en una cuadrícula de 2x2
 library(gridExtra)
@@ -142,11 +142,11 @@ data("biomasa")
 
 # Crear el gráfico con ggplot2
 ggplot(biomasa, aes(x = diametro, y = bio_total)) +
-geom_point(color = "#FF7F00", size =2) +  # Usar puntos para representar los datos
-labs(title = "Gráfico de Biomasa",
-x = "Diámetro",
-y = "Biomasa Total") +
-theme_minimal()
+  geom_point(color = "#FF7F00", size =2) +  # Usar puntos para representar los datos
+  labs(title = "Gráfico de Biomasa",
+       x = "Diámetro",
+       y = "Biomasa Total") +
+  theme_minimal()
 
 
 
@@ -187,8 +187,8 @@ La transformación de la variable respuesta $Y$ es útil para dar solución a pr
 El método de box-cox permite encontrar el valor de $\lambda$ óptimo para la función :
 
 $$g_{\lambda}(y) = \left \{ \begin{matrix} \dfrac{y^{\lambda}-1}{y} & \mbox{ si } \lambda \neq 0\\ 
-	&  \\
-	log(y)  & \mbox{ si } \lambda =0 \end{matrix}\right.$$
+                                     &  \\
+                                     log(y)  & \mbox{ si } \lambda =0 \end{matrix}\right.$$
 
 El valor $\dfrac{y^{\lambda}-1}{y}$ se puede simplificar por $y^{\lambda}$ cuando el modelo es predictivo. El valor máximo de este valor podrá orientar sobre la forma funcional de la variables respuesta.
 
@@ -214,7 +214,7 @@ modelo1=lm(bio_total ~ diametro, data=biomasa)
 summary(modelo1)
 par(mfrow = c(1,2))
 boxcox(lm(biomasa$bio_total ~ biomasa$diametro, data=biomasa), lambda = -3:3)
-#Se repite el proceso pero esta vez entrechando el rango de valores de lambda 
+#Se repite el proceso pero esta vez estrechando el rango de valores de lambda 
 bc<-boxcox(lm(biomasa$bio_total ~ biomasa$diametro), lambda = -1:1)
 (lambda <- bc$x[which.max(bc$y)])
 ```
@@ -226,7 +226,7 @@ knitr::include_graphics("img/box_cox.png")
 ```
 
 <center>
-**Figura 3.10**  Valor optimo de $\lambda$
+**Figura 3.10**  Valor óptimo de $\lambda$
 </center>
 
 <br/><br/>

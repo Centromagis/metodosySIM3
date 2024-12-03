@@ -33,7 +33,7 @@ Los errores   siguen una distribución normal $(\varepsilon_{i} \sim N(0, \sigma
 
 </br>
 
-### <span style="color:#034A94">**Homoscedasticidad**</span>
+### <span style="color:#034A94">**Homocedasticidad**</span>
 
 La varianza al rededor de la linea de regresión, para cualquier valor constante ($V[\varepsilon] = \sigma^2$)
 
@@ -41,13 +41,13 @@ La varianza al rededor de la linea de regresión, para cualquier valor constante
 
 ###  <span style="color:#034A94">**Linealidad**</span>
 
-La relación entre la variable dependiente y las variables independientes y el error es lineal. Es decir que las variables pueden tener cualquier forma pero los parametros deben garantizar una relacion lineal ($y_{i}= \beta_{0}+ \beta_{1} x_{i} + \varepsilon_{i}$)
+La relación entre la variable dependiente y las variables independientes y el error es lineal. Es decir que las variables pueden tener cualquier forma pero los parámetros deben garantizar una relación lineal ($y_{i}= \beta_{0}+ \beta_{1} x_{i} + \varepsilon_{i}$)
 
 </br>
 
 ###  <span style="color:#034A94">**No autocorrelación**</span>
 
-Los errores que corresponden a diferentes individuos o diferentes tiempo deben ser independintes unos de otros ($Cov[\varepsilon_{i},  \varepsilon_{j}] = 0$)
+Los errores que corresponden a diferentes individuos o diferentes tiempo deben ser independientes unos de otros ($Cov[\varepsilon_{i},  \varepsilon_{j}] = 0$)
 
 </br>
 
@@ -63,9 +63,9 @@ Para estas verificaciones se emplean pruebas de hipótesis :
 </br>
 
 * Normalidad : `shapiro.test()`
-* Homoscedasticidad : `lmtest::bptest()`
+* Homocedasticidad : `lmtest::bptest()`
 * No autocorrelación : `lmtest::dwtest()` 
-* outliers : visualización gráfica - `boxplot()`, `plot()` 
+* Outliers : visualización gráfica - `boxplot()`, `plot()` 
 
 
 

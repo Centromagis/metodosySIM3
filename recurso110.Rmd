@@ -2,9 +2,9 @@
 title: <span style="color:#034a94"> **Coeficiente de correlación**</span>
 author: "Métodos y Simulación Estadística"
 output:
-html_document:
-code_folding: hide
-css: style.css
+  html_document:
+    code_folding: hide
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -20,33 +20,33 @@ library(tidyverse)
 library(PerformanceAnalytics)
 
 
-#install.packages("devtools") # solo una vez
+#install.packages("devtools") # Solo una vez
 # devtools::install_github("dgonxalex80/paqueteMET") # descarga paqueteDEG
-library(paqueteMETODOS) # activa paqueteMET
-data("biomasa") # carga la base biomasa
+library(paqueteMETODOS) # Activa paqueteMET
+data("biomasa") # Carga la base biomasa
 
 gen.corr.data<- function(rho,n){
-	x <- rnorm(n)
-	z <- rnorm(n)
-	y<- rho*x + sqrt(1-rho^2)*z
-	result <-cbind(y,x)
-	return(result)
+x <- rnorm(n)
+z <- rnorm(n)
+y<- rho*x + sqrt(1-rho^2)*z
+result <-cbind(y,x)
+return(result)
 }
 #-------------------------------------------------------------------------
 library(ggplot2)
 library(patchwork)
 Theme1= theme(axis.text.x = element_blank(),
-axis.text.y = element_blank(),
-axis.ticks = element_blank(),
-axis.title.x = element_text(size = 12),
-axis.title.y = element_text(size = 12))
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title.x = element_text(size = 12),
+        axis.title.y = element_text(size = 12))
 #------------------------------------------------------------------------
 Theme2= theme(
-#axis.text.x = element_blank(),
-#axis.text.y = element_blank(),
-#axis.ticks = element_blank(),
-axis.title.x = element_text(size = 11),
-axis.title.y = element_text(size = 11))
+        #axis.text.x = element_blank(),
+        #axis.text.y = element_blank(),
+        #axis.ticks = element_blank(),
+        axis.title.x = element_text(size = 11),
+        axis.title.y = element_text(size = 11))
 
 data(biomasa)
 biomasa38=biomasa[,3:8]
@@ -72,7 +72,7 @@ tabla <- table(X, Y)
 
 ## <span style="color:#034a94">**Coeficiente de correlación**</span>
 
-Es una medida de la magnitud de la **asociación lineal** entre dos variables. Indica si los puntos tienen una tendencia a disponerse alineadamente y es útil para determinar si hay relación lineal entre las variables. El coeficiente de correlación presenta las siguientes características:
+Es una medida de la magnitud de la *asociación lineal** entre dos variables. Indica si los puntos tienen una tendencia a disponerse alineadamente y es útil para determinar si hay relación lineal entre las variables. El coeficiente de correlación presenta las siguientes características:
 
 </br>
 
@@ -99,7 +99,7 @@ Un valor cercano a $1$ indica asociación directa o positiva y un valor cercano 
 <div class="content-box-blue">
 
 $$r = \dfrac{n \Bigg(\displaystyle\sum_{i=1}^{n} x_{i}y_{i} \Bigg) \Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg) \Bigg(\displaystyle\sum_{i=1}^{n} y_{i}\Bigg)}{
-	{\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} x_{i}^{2} \Bigg) - \Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)^{2}} } {\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} y_{i}^{2} \Bigg) - \Bigg(\displaystyle\sum_{i=1}^{n} y_{i} \Bigg)^{2}}}}$$
+{\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} x_{i}^{2} \Bigg) - \Bigg(\displaystyle\sum_{i=1}^{n} x_{i} \Bigg)^{2}} } {\sqrt{n \Bigg(\displaystyle\sum_{i=1}^{n} y_{i}^{2} \Bigg) - \Bigg(\displaystyle\sum_{i=1}^{n} y_{i} \Bigg)^{2}}}}$$
 
 </br>
 
@@ -122,9 +122,9 @@ Los valores obtenidos del coeficiente de correlación permiten clasificar la rel
 | Coeficiente de corelación  | Relación lineal             |
 |:--------------------------:|:---------------------------:|
 | $0.8 \leq r < 1.0$         |  Positiva fuerte            |
-| $0.3 \leq r < 0.8$         |  Positiva débil             |
+| $0.3 \leq r < 0.8$         |  Positiva debil             |
 | $-0.3 < r < 3$             |  No existe                  |
-| $-0.8 < r \leq -0.3$       |  Negativa débil             |
+| $-0.8 < r \leq -0.3$       |  Negativa debil             |
 | $-1.0 \leq r \leq -0.8$    |  Negativa fuerte            |
 
 </br></br>
@@ -189,7 +189,7 @@ Por lo tanto, el resultado obtenido del coeficiente de correlación $r = −0.83
 
 </br>
 
-Es importante verificar si de $\rho$ es igual a cero o se puede considerar diferente de cero, a partir de la muestra de estudio. Para ello se utiliza un estadístico de prueba con distribución t-Studen con $v=n-2$ grados de libertad
+Es importante verificar si de $\rho$ es igual a cero o se puede considerar diferente de cero, a partir de la muestra de estudio. Para ello se utiliza un estadístico de prueba con distribución t-Studen con $v=n-2$ grados de libertad.
 
 
 <div class="content-box-blue">
@@ -217,9 +217,9 @@ data:  x and y
 t = -3.0371, df = 4, p-value = 0.03851
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
--0.98148791 -0.07328662
+ -0.98148791 -0.07328662
 sample estimates:
-cor 
+       cor 
 -0.8351746 
 </pre>
 

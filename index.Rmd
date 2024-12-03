@@ -37,7 +37,7 @@ Contenido de la unidad:
 
 * **Correlación**
   * Análisis de correlación
-  * Ceficiente de Pearson
+  * Coeficiente de Pearson
   * Otros coeficientes
   * Código R - correlaciones
   

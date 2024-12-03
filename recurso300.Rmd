@@ -2,9 +2,9 @@
 title: <span style="color:#034a94"> **Predicción con el modelo de RLS**</span>
 author: "Métodos y Simulación Estadística"
 output:
-html_document:
-code_folding: hide
-css: style.css
+  html_document:
+    code_folding: hide
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}
@@ -42,7 +42,7 @@ En este caso es posible que estemos interesados en estimar el valor de la pendie
 
 </br>
 
-Estos resultados están basados en la distribución normal de los errores, la existencia de homoscedasticidad (varianza constante de los errores) , la no correlación de errores (independencia de errores)  y la no existencia de multicolinealidad (relación fuerte entre las variables independientes) 
+Estos resultados están basados en la distribución normal de los errores, la existencia de homocedasticidad (varianza constante de los errores) , la no correlación de errores (independencia de errores)  y la no existencia de multicolinealidad (relación fuerte entre las variables independientes) 
 
 </br>
 
@@ -55,13 +55,13 @@ knitr::include_graphics("img/distribuciones.png")
 
 </br></br>
 
-Se parte de una variable con distribución normal $X$, con media $\mu$ y varianza $\sigma^2$. Esta variable se puede estandarizar, restandole su media y dividiendola por su desviación estándar, transformándola en otra variable denominada $Z$. A esta variable se le denomina normal estándar dado que tiene media cero y varianza uno. 
+Se parte de una variable con distribución normal $X$, con media $\mu$ y varianza $\sigma^2$. Esta variable se puede estandarizar, restándole su media y dividiéndola por su desviación estándar, transformándola en otra variable denominada $Z$. A esta variable se le denomina normal estándar dado que tiene media cero y varianza uno. 
 
 La suma de $n$ variables normales estándar, cada una de ellas elevadas al cuadrado, originan una variable $\chi^2$ (chi-cuadrado). 
 
-La razón de una variable normal estándar con la raiz cuadrada de una variable chi-cuadrado sobre sus grados de libertad, da origen a un variable T con distribución t-Student.
+La razón de una variable normal estándar con la raíz cuadrada de una variable chi-cuadrado sobre sus grados de libertad, da origen a un variable T con distribución t-Student.
 
-Por último la razón de dos variables chi-cuadrado, origina una variable F con distribución F-Fisher
+Por último la razón de dos variables chi-cuadrado, origina una variable F con distribución F-Fisher.
 
 A este grupo de distribuciones se les denomina distribuciones de probabilidad muestrales
 

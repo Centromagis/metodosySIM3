@@ -1,35 +1,35 @@
 library(paqueteMOD)
 library(dplyr)
 data("rotacion")
-# visualizacion data
+# Visualización data
 glimpse(rotacion)
 
-# seleccion de variables
+# Selección de variables
 datos<-rotacion[, c(1,2,3,4,5)]
-# arreglo nombre de variables
+# Arreglo nombre de variables
 names(datos) = c("rotacion","edad","viaje.negocios_","departamento_","distancia.casa")
 
-# convertir en factor la variable dependiente
+# Convertir en factor la variable dependiente
 datos$rotacion<-factor(datos$rotacion)
 
-# modelo1
+# Modelo1
 modelo1= 
   glm(rotacion ~ edad + viaje.negocios_ + departamento_ + distancia.casa, family = binomial(link = "logit"), data = datos)
 summary(modelo1)
 
-# evaluacion del modelo
+# Evaluacion del modelo
 
-# separacion de muetras
+# Separacion de muetras
 ntrain <- nrow(datos)*0.6
 ntest <- nrow(datos)*0.4
 # c(ntrain,ntest)
 
 set.seed(123)
 index_train<-sample(1:nrow(datos),size = ntrain)
-train<-datos[index_train,]  # muestra de entrenamiento
-test<-datos[-index_train,]  # muestra de prueba
+train<-datos[index_train,]  # Muestra de entrenamiento
+test<-datos[-index_train,]  # Muestra de prueba
 
-# matriz de confucion
+# Matriz de confusión
 valor_pronosticado <- predict(modelo1,test,type = "response")
 niveles_pronosticados <- ifelse(valor_pronosticado >0.5, "Si","No") %>%
   factor(.)
@@ -55,11 +55,11 @@ rownames(matriz_confusion) = c(" Si ", " No    ")
 colnames(matriz_confusion) = c("Si", "No")
 matriz_confusion
 #-----------------------------------------------------------------------
-# que hacer cuando la dato esta desbalanceada
+# Qué hacer cuando la data esta desbalanceada
 table(test$rotacion) %>% 
   prop.table()
 
-# oversampling
+# Oversampling
 train.blc <- ovun.sample(rotacion~., data=train, 
                          p=0.5, seed=1, 
                          method="over")$data
@@ -69,12 +69,12 @@ test.blc <- ovun.sample(rotacion~., data=test,
                          method="over")$data
 
 
-# modelo1
+# Modelo2
 modelo2=  glm(rotacion ~ edad + viaje.negocios_ + departamento_ + distancia.casa, 
               family = binomial(link = "logit"), data = train.blc)
 summary(modelo2)
 
-# matriz de confucion
+# Matriz de confusión
 valor_prnt.blc <- predict(modelo2,test.blc,type = "response")
 niveles_prnt.blc <- ifelse(valor_prnt.blc >0.5, "Si","No") %>%
   factor(.)
